@@ -5,7 +5,7 @@ from bigmarker.models.attendees import Attendee
 from bigmarker.models.conference import Conference
 
 
-class AttendeesClient(BaseClient):
+class AttendeeClient(BaseClient):
     def _attendees(self, conference_id: Conference.id):
         url = f"https://www.bigmarker.com/api/v1/{conference_id}/attendees/"
         first_page = self._session.get(url, headers=self._headers).json()

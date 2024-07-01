@@ -1,5 +1,5 @@
-from bigmarker.clients import ConferenceClient, AttendeesClient
+from bigmarker.clients import ConferenceClient, AttendeeClient, RegistrationClient
 
 
-class BigMarkerClient(ConferenceClient, AttendeesClient):
+class BigMarkerClient(ConferenceClient, AttendeeClient, RegistrationClient):
     pass

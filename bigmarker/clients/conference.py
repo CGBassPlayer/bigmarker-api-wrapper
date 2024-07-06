@@ -4,7 +4,7 @@ from typing import Optional, Literal
 import requests
 from pydantic import NonNegativeInt
 
-from base import BaseClient
+from .base import BaseClient
 from bigmarker.models.conference import Conference, ConferencePresenter
 
 
@@ -15,12 +15,15 @@ class ConferenceClient(BaseClient):
             'start_time': start_time
         }
         url = "https://www.bigmarker.com/api/v1/conferences"
-        first_page = self._session.get(url, headers=self._headers, params=params).json()
+        first_page = self._session.get(url,
+                                       headers=self._headers,
+                                       params=params).json()
         yield first_page
         num_pages = first_page['total_pages']
 
         for page in range(2, num_pages + 1):
-            next_page = self._session.get(url, params=params | {'page': page}).json()
+            next_page = self._session.get(url,
+                                          params=params | {'page': page}).json()
             yield next_page
 
     def _conferences_search(self, search_params: dict):
@@ -28,13 +31,17 @@ class ConferenceClient(BaseClient):
             'type': 'all',
         }
         url = f"https://www.bigmarker.com/api/v1/conferences/search/"
-        first_page = self._session.get(url, headers=self._headers, params=params,
+        first_page = self._session.get(url,
+                                       headers=self._headers,
+                                       params=params,
                                        data={k: v for k, v in search_params.items() if v is not None}).json()
         yield first_page
         num_pages = first_page['total_pages']
 
         for page in range(2, num_pages + 1):
-            next_page = self._session.get(url, params=params | {'page': page}, data=search_params).json()
+            next_page = self._session.get(url,
+                                          params=params | {'page': page},
+                                          data=search_params).json()
             yield next_page
 
     def get_all_conferences(self) -> list[Conference]:
@@ -52,10 +59,10 @@ class ConferenceClient(BaseClient):
 
     def search_conference(self,
                           title: Optional[str] = None,
-                          start_time: Optional[Conference.start_time] = None,
-                          end_time: Optional[Conference.end_time] = None,
-                          conference_ids: Optional[list[Conference.id]] = None,
-                          presenter_member_ids: Optional[ConferencePresenter.presenter_id] = None,
+                          start_time: Optional[str] = None,
+                          end_time: Optional[str] = None,
+                          conference_ids: Optional[list[str]] = None,
+                          presenter_member_ids: Optional[str] = None,
                           role: Optional[Literal['hosting', 'attending', 'all']] = None) -> Optional[list[Conference]]:
         all_serach_params: dict = {
             'title': title,

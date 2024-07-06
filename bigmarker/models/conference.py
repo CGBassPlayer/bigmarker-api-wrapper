@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional, Literal
 
-from pydantic import BaseModel, HttpUrl, EmailStr, NonNegativeInt
+from pydantic import BaseModel, HttpUrl, EmailStr, NonNegativeInt, Field
 from pydantic_extra_types.phone_numbers import PhoneNumber
 
 

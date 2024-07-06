@@ -1,1 +1,1 @@
-from client import BigMarkerClient
+from .client import BigMarkerClient

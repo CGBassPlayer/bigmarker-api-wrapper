@@ -22,11 +22,10 @@ class RegistrationClient(BaseClient):
         response = requests.put(url=f"https://www.bigmarker.com/api/v1/conferences/register",
                                 headers=self._headers,
                                 json=registrant.model_dump_json(by_alias=True,
-                                                                exclude_none=True,
-                                                                exclude_unset=True))
+                                                                exclude_none=True))
         if response.status_code == 401:
             return "You do not have permission to access or modify this conference."
         elif response.status_code == 404:
             return "The conference you are requesting is not found."
 
-        return response.json["conference_url"]
+        return response.json()["conference_url"]

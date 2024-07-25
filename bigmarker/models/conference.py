@@ -504,3 +504,13 @@ class FileStatus(BaseModel):
 class UploadFileStatus(FileStatus):
     id: Optional[str] = None
     type: Optional[str] = None
+
+
+class HandoutUpload(BaseModel):
+    title: str
+    handout_link: HttpUrl
+    handout_ull: HttpUrl
+
+
+class HandoutItem(HandoutUpload):
+    icon_url: Optional[HttpUrl] = None

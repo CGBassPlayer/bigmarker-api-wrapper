@@ -40,6 +40,9 @@ def main():
         }
     ))
 
+    created_conference = bm_client.create_conference(channel_id="principal",
+                                                     title="test")
+
 
 if __name__ == '__main__':
     main()
